@@ -1,9 +1,9 @@
 ## Initial Project Template for GW SWE Team Project
 
 #### Project uses: 
-Maven
-JDK 17
-Spring Boot
+* Maven
+* JDK 17
+* Spring Boot
 
 #### Manually added dependencies of:
 
