@@ -15,7 +15,7 @@ public class RouterController {
     //return a string
     @GetMapping("")
     public String hello() {
-        return "Hello Team!";
+        return "Hello RouterController!";
     }
 
     //return original body back
