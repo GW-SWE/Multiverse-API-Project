@@ -17,6 +17,7 @@ public class AuthenticationService {
     private final Map<String, String> credentialStore = new HashMap<>();
 
     public boolean encryptAndStore(String username, String password) {
+        if (username == null || password == null)return false;
         //generate new string with hashedPassword
         Dotenv dotenv = Dotenv.load();
         String hashedPassword = hashAlg.hashToString(Integer.parseInt(dotenv.get("COST_FACTOR")), password.toCharArray());
@@ -25,9 +26,7 @@ public class AuthenticationService {
     }
 
     public boolean verifyPassword(String username, String password) {
-        if(!credentialStore.containsKey(username)){
-            return false;
-        }
+        if(!credentialStore.containsKey(username)){return false;}
         String hashedPassword = credentialStore.get(username);
         return BCrypt.verifyer().verify(password.toCharArray(), hashedPassword).verified;
     }
