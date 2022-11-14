@@ -13,5 +13,19 @@ public class UsersService {
     @Autowired
     UsersRepository usersRepository;
 
+    public Users createUsers(Users info) {return usersRepository.save(info);}
+
+    public List<Users> getUsers() { return usersRepository.findAll();}
+
+    public Users updateUsers(Long id, Users input) {
+        Users data = usersRepository.findById(id).get();
+        if(!Objects.isNull(input.getUsername())) {data.setUsername(input.getUsername());}
+        if(!Objects.isNull(input.getPassword())) {data.setPassword(input.getPassword());}
+
+        return usersRepository.save(data);
+    }
+
     public Optional<Users> getUsersById(Long id) { return usersRepository.findById(id);}
+
+
 }

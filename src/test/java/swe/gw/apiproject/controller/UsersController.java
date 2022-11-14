@@ -14,6 +14,16 @@ public class UsersController {
     @Autowired
     UsersService usersService;
 
+    @PostMapping("/create")
+    public Users createUsers(@RequestBody Users data) { return usersService.createUsers(data);}
+
+    @GetMapping("/all")
+    public List<Users> readUsers() { return usersService.getUsers();}
+
+    @PutMapping("/update/{id}")
+    public Users readUsers(@PathVariable(value = "id") Long id, @RequestBody Users input)
+    {return usersService.updateUsers(id, input);}
+
     @GetMapping("/finduser/{id}")
     public Optional<Users> readUsers(@PathVariable(value = "id") Long id) {return usersService.getUsersById(id);}
 }
