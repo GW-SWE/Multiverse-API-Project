@@ -26,4 +26,7 @@ public class UsersController {
 
     @GetMapping("/finduser/{id}")
     public Optional<Users> readUsers(@PathVariable(value = "id") Long id) {return usersService.getUsersById(id);}
+
+    @GetMapping("/findusername/{username}")
+    public Optional<Users> readUsers(@PathVariable(value = "username") String username) {return usersService.getUsersByUsername(username);}
 }

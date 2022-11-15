@@ -27,5 +27,7 @@ public class UsersService {
 
     public Optional<Users> getUsersById(Long id) { return usersRepository.findById(id);}
 
+    public Optional<Users> getUsersByUsername(String username) { return usersRepository.findByUsername(username);}
+
 
 }
