@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.*;
+
+//TODO - Check this code is no longer required.
+
 @RestController
 public class RouterController {
     //return a string
@@ -39,4 +42,6 @@ public class RouterController {
         System.out.println(map.get("a"));
         return map.get("a").toString();
     }
+
+    //TODO - Remove this redundant code.
 }
