@@ -1,10 +1,12 @@
 package swe.gw.apiproject.controller;
 
+import org.apache.logging.log4j.util.Chars;
 import swe.gw.apiproject.model.Users;
 import swe.gw.apiproject.service.UsersService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.print.DocFlavor;
 import java.util.*;
 
 @RestController
@@ -29,4 +31,7 @@ public class UsersController {
 
     @GetMapping("/findusername/{username}")
     public Optional<Users> readUsers(@PathVariable(value = "username") String username) {return usersService.getUsersByUsername(username);}
+
+    @GetMapping("/findemail/{email}")
+    public Optional<Users> readUsersForEmail(@PathVariable(value = "email") String email) {return usersService.getUsersByEmail(email);}
 }

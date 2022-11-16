@@ -21,6 +21,7 @@ public class UsersService {
         Users data = usersRepository.findById(id).get();
         if(!Objects.isNull(input.getUsername())) {data.setUsername(input.getUsername());}
         if(!Objects.isNull(input.getPassword())) {data.setPassword(input.getPassword());}
+        if(!Objects.isNull(input.getEmail())) {data.setEmail(input.getEmail());}
 
         return usersRepository.save(data);
     }
@@ -28,6 +29,8 @@ public class UsersService {
     public Optional<Users> getUsersById(Long id) { return usersRepository.findById(id);}
 
     public Optional<Users> getUsersByUsername(String username) { return usersRepository.findByUsername(username);}
+
+    public Optional<Users> getUsersByEmail(String email) { return usersRepository.findByEmail(email);}
 
 
 }
