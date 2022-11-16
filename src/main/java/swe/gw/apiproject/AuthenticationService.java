@@ -13,7 +13,6 @@ public class AuthenticationService {
 
     private final BCrypt.Hasher hashAlg = BCrypt.with(Version.VERSION_2Y);
 
-    //TODO: Create a data storage solution - This works for now as a short term storage while testing
     private final Map<String, String> credentialStore = new HashMap<>();
 
     public boolean encryptAndStore(String username, String password) {

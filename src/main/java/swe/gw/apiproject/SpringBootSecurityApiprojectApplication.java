@@ -10,10 +10,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class ApiprojectApplication {
+public class SpringBootSecurityApiprojectApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiprojectApplication.class, args);
+		SpringApplication.run(SpringBootSecurityApiprojectApplication.class, args);
 	}
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
