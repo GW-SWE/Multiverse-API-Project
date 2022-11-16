@@ -4,6 +4,8 @@
 * Maven
 * JDK 17
 * Spring Boot
+* Spring Security
+* mySQL Databases
 
 #### Manually added dependencies of:
 
