@@ -17,6 +17,7 @@ public class UsersController {
     UsersService usersService;
 
     @PostMapping("/create")
+    // requires hashing before post
     public Users createUsers(@RequestBody Users data) { return usersService.createUsers(data);}
 
     @GetMapping("/all")
