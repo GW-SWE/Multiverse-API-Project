@@ -3,7 +3,7 @@ package swe.gw.apiproject.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users123", schema = "sql8579799")
 public class Users {
 
     @Id
@@ -13,7 +13,8 @@ public class Users {
 
     @Column(name = "username")
     private String username;
-
+    @Column(name = "role")
+    private String role;
     @Column(name = "email")
     private String email;
 
@@ -48,7 +49,13 @@ public class Users {
         return password;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getRole() {return role;}
+
 }
