@@ -13,7 +13,12 @@ public class UsersService {
     @Autowired
     UsersRepository usersRepository;
 
-    public Users createUsers(Users info) {return usersRepository.save(info);}
+    public Users createUsers(Users input) {
+        if (!Objects.isNull(input.getId())) {
+
+        }
+        return usersRepository.save(input);
+    }
 
     public List<Users> getUsers() { return usersRepository.findAll();}
 
@@ -32,5 +37,13 @@ public class UsersService {
 
     public Optional<Users> getUsersByEmail(String email) { return usersRepository.findByEmail(email);}
 
+    public Users deleteUsersById(Long id) {
+        Users data = usersRepository.findById(id).get();
+        if (!Objects.isNull(data.getId())) {
+            return null;
+        }
+        usersRepository.deleteById(id);
+        return data;
+    }
 
 }
