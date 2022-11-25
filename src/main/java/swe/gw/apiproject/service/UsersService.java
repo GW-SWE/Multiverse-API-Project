@@ -1,5 +1,7 @@
 package swe.gw.apiproject.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import swe.gw.apiproject.model.Users;
 import swe.gw.apiproject.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,7 @@ public class UsersService {
     UsersRepository usersRepository;
 
     public Users createUsers(Users input) {
-        if (!Objects.isNull(input.getId())) {
-
-        }
-        return usersRepository.save(input);
+            return usersRepository.save(input);
     }
 
     public List<Users> getUsers() { return usersRepository.findAll();}

@@ -26,7 +26,7 @@ public class SpringBootSecurityApiprojectApplication {
 			for (String beanName : beanNames) {
 				System.out.println(beanName);
 			}
-			System.out.println("http://localhost:8080/users/findusername/siid");
+			System.out.println("http://localhost:8080/login");
 
 		};
 	}

@@ -3,7 +3,7 @@ package swe.gw.apiproject.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Users123")
+@Table(name = "users_table")
 public class Users {
 
     @Id
