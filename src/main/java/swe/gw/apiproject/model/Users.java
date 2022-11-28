@@ -3,11 +3,11 @@ package swe.gw.apiproject.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users_table")
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -19,6 +19,19 @@ public class Users {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "role")
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
 
     public Long getId() {
         return id;
@@ -51,4 +64,5 @@ public class Users {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

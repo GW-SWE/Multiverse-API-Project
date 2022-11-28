@@ -1,5 +1,7 @@
 package swe.gw.apiproject.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import swe.gw.apiproject.model.Users;
 import swe.gw.apiproject.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,18 @@ public class UsersService {
     @Autowired
     UsersRepository usersRepository;
 
-    public Users createUsers(Users info) {return usersRepository.save(info);}
+    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    public Users createUsers(Users input)
+    {
+        if (input.getUsername() == null || input.getRole() == null || input.getPassword() == null) {
+            return null;
+        }
+//        if(usersRepository.findByUsername(input.getUsername()).isEmpty()) {
+//            return null;
+//        }
+        input.setPassword(passwordEncoder.encode(input.getPassword()));
+        return usersRepository.save(input);
+    }
 
     public List<Users> getUsers() { return usersRepository.findAll();}
 
@@ -32,5 +45,13 @@ public class UsersService {
 
     public Optional<Users> getUsersByEmail(String email) { return usersRepository.findByEmail(email);}
 
+    public Users deleteUsersById(Long id) {
+        Users data = usersRepository.findById(id).get();
+        if (!Objects.isNull(data.getId())) {
+            return null;
+        }
+        usersRepository.deleteById(id);
+        return data;
+    }
 
 }
