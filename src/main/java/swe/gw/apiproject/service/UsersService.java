@@ -1,5 +1,6 @@
 package swe.gw.apiproject.service;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import swe.gw.apiproject.model.Users;
@@ -21,9 +22,9 @@ public class UsersService {
         if (input.getUsername() == null || input.getRole() == null || input.getPassword() == null) {
             return null;
         }
-//        if(usersRepository.findByUsername(input.getUsername()).isEmpty()) {
-//            return null;
-//        }
+        if(this.getUsersByUsername(input.getUsername()).isPresent()) {
+            return null;
+        }
         input.setPassword(passwordEncoder.encode(input.getPassword()));
         return usersRepository.save(input);
     }
@@ -31,11 +32,18 @@ public class UsersService {
     public List<Users> getUsers() { return usersRepository.findAll();}
 
     public Users updateUsers(Long id, Users input) {
-        Users data = usersRepository.findById(id).get();
-        if(!Objects.isNull(input.getUsername())) {data.setUsername(input.getUsername());}
+        Optional<Users> rawData = this.getUsersById(id);
+
+        if (rawData.isEmpty()) {
+            return null;
+        }
+        Users data = (Users) rawData.get();
+        // check that a new username is provided and that it does not already exist
+        if(!Objects.isNull(input.getUsername()) || this.getUsersByUsername(input.getUsername()).isEmpty())  {
+            data.setUsername(input.getUsername());
+        }
         if(!Objects.isNull(input.getPassword())) {data.setPassword(input.getPassword());}
         if(!Objects.isNull(input.getEmail())) {data.setEmail(input.getEmail());}
-
         return usersRepository.save(data);
     }
 
@@ -46,12 +54,20 @@ public class UsersService {
     public Optional<Users> getUsersByEmail(String email) { return usersRepository.findByEmail(email);}
 
     public Users deleteUsersById(Long id) {
-        Users data = usersRepository.findById(id).get();
-        if (!Objects.isNull(data.getId())) {
+        Optional<Users> data = this.getUsersById(id);
+        if (data.isEmpty()) {
             return null;
         }
         usersRepository.deleteById(id);
-        return data;
+        return data.get();
     }
-
+    public ResponseEntity<String> noUserError() {return ResponseEntity.badRequest().body("user not found");}
+    public Map userResponse(Users user) {
+        Map <String, String> userRes = new HashMap<String, String>();
+        userRes.put("role", user.getRole());
+        userRes.put("email", user.getEmail());
+        userRes.put("username", user.getUsername());
+        userRes.put("id", user.getId().toString());
+        return userRes;
+    }
 }
